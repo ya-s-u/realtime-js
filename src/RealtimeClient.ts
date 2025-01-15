@@ -1,5 +1,3 @@
-import type { WebSocket as WSWebSocket } from 'ws'
-
 import {
   CHANNEL_EVENTS,
   CONNECTION_STATE,
@@ -63,7 +61,7 @@ export interface WebSocketLikeConstructor {
   ): WebSocketLike
 }
 
-export type WebSocketLike = WebSocket | WSWebSocket | WSWebSocketDummy
+export type WebSocketLike = WebSocket | WSWebSocketDummy
 
 export interface WebSocketLikeError {
   error: any
@@ -210,13 +208,6 @@ export default class RealtimeClient {
       close: () => {
         this.conn = null
       },
-    })
-
-    import('ws').then(({ default: WS }) => {
-      this.conn = new WS(this.endpointURL(), undefined, {
-        headers: this.headers,
-      })
-      this.setupConnection()
     })
   }
 
